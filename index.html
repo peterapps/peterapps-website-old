@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+    <title>Peter's Apps</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css" />
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css" />
+<!-- iOS webapp -->
+<link rel="apple-touch-icon" href="icons/peters-apps-ios-icon.png">
+<meta name="apple-mobile-web-app-title" content="Peter's Apps" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<!-- Android webapp -->
+<link rel="manifest" href="install/manifest.json" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="icon" sizes="192x192" href="icons/peters-apps-android-icon-192x192.png" />
+<link rel="stylesheet" type="text/css" href="ath/addtohomescreen.css" />
+<script src="ath/addtohomescreen.js"></script>
+<style>.app-desc {display:none;}</style>
+  </head>
+  <body>
+  <script>addToHomescreen();</script>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Views, and they are tabs-->
+    <!-- We need to set "toolbar-through" class on it to keep space for our tab bar-->
+    <div class="views tabs toolbar-through">
+       <!--Apps-->
+      <div id="view-1" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">Store</div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div data-page="index-1" class="page">
+    <!-- Search Bar -->
+    <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Search">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a href="#" class="searchbar-cancel">Cancel</a>
+    </form>
+    
+    <!-- Search Bar overlay-->
+    <div class="searchbar-overlay"></div>
+            <div class="page-content item-title">
+              <div class="content-block">
+                <h3>Peter's (Semi-) Original Apps</h3>
+              </div>
+              <div class="list-block list-block-search">
+                <ul>
+                  <li><a href="apps/annoyingkeyboard.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner"> 
+                          <div class="item-title">Annoying Keyboard
+                          <i class="app-desc">custom keyboard</i></div>
+                        </div>
+                      </div></a></li>
+                  <li><a href="apps/badlibs.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner"> 
+                          <div class="item-title">Bad Libs
+                          <i class="app-desc">Mad Libs</i></div>
+                        </div>
+                      </div></a></li>
+                  <li><a href="apps/flappyvinay.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner"> 
+                          <div class="item-title">Flappy Vinay
+                          <i class="app-desc">Flappy Bird game</i></div>
+                        </div>
+                      </div></a></li>
+                  <li><a href="apps/jetpackface.html" class="item-link">
+                      <div class="item-content"> 
+                        <div class="item-inner">
+                          <div class="item-title">Jetpack Face
+                          <i class="app-desc">sidescroller, side-scrolling, side-scroller</i></div>
+                        </div>
+                      </div></a></li>
+                </ul>
+              </div>
+              <div class="content-block">
+                <h3>Other Third-Party Apps</h3>
+              </div>
+              <div class="list-block list-block-search">
+                <ul>
+                  <li>
+                    <a href="apps/airshou.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">AirShou
+                          <i class="app-desc">screen recorder, screen-recorder</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/cardsagainst.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">CardsAgainst
+                          <i class="app-desc">cards against humanity card game</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/filebrowser.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">FileBrowser
+                          <i class="app-desc">finder explorer</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/gammathingy.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Gamma Thingy
+                          <i class="app-desc">screen gamma temperature night shift</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/gba4ios.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">GBA4iOS
+                          <i class="app-desc">emulator gameboy advance gameboy color nintendo gba gbc gb</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/idos.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">iDOS
+                          <i class="app-desc">x86 windows emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/inds.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">iNDS
+                          <i class="app-desc">nintendo ds emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/issb.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">iSSB
+                          <i class="app-desc">nintendo super smash bros emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/mobilebrawler.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">MobileBrawler
+                          <i class="app-desc">nintendo super smash bros emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/naughtykeyboard.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">NaughtyKeyboard
+                          <i class="app-desc">custom keyboard</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/nds4ios.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">nds4ios
+                          <i class="app-desc">nintendo ds emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/nestopia.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Nestopia
+                          <i class="app-desc">nintendo entertainment system nes emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/newgamepad.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">NewGamepad
+                          <i class="app-desc">multi-platform emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/nitrogen.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Nitrogen
+                          <i class="app-desc">nintendo ds emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/ppsspp.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">PPSSPP
+                          <i class="app-desc">sony playstation portable psp emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/provenance.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Provenance
+                          <i class="app-desc">sega sg-1000 megacd game gear master system genesis nintendo entertainment system nes super nintendo entertainment system snes gameboy advance gameboy color famicom emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/tether.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Tether
+                          <i class="app-desc">usb tethering personal hotspot mobile hotspot mifi wifi</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="apps/retroarch.html" class="item-link">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">RetroArch
+                          <i class="app-desc">multi-platform emulator</i></div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--FAQ-->
+      <div id="view-2" class="view tab">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">FAQ</div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div data-page="index-2" class="page">
+            <div class="page-content">
+              <div class="content-block">
+                <h3>Why is my device saying that it is unable to download the apps?</h3>
+                <p>You haven't registered your UDID with Peter yet, which is sort of like a serial number. Send Peter your device's <a href="http://get.udid.io/?mail=peterapps2016@gmail.com" class="external">UDID</a> at <a href="mailto:peterapps2016@gmail.com" class="external">peterapps2016@gmail.com</a> and tell him which app you want. It should be updated soon.</p>
+                <h3>I already gave Peter my UDID, so why am I still unable to install apps?</h3>
+                <p>Peter probably hasn't gotten around to uploading a new version of the app you want. Email him at <a href="mailto:peterapps2016@gmail.com" class="external">peterapps2016@gmail.com</a> and tell him which app you are trying to download. A new version should be uploaded soon.</p>
+                <h3>How do you get all these apps and their info?</h3>
+                <p>Peter scours the internet for useful apps, many of which come from <a href="http://iemulators.com/" class="external">iEmulators</a> and <a href="https://emu4ios.net/" class="external">Emu4iOS</a>.</p>
+                <h3>Why are there emulators here? Aren't emulators, like, illegal?</h3>
+                <p>Emulators themselves are perfectly legal. However, downloading a pirated copy of a ROM violates copyright laws and is thus illegal, even if <a href="https://www.nintendo.com/corp/legal.jsp#download_rom" class="external">you own a physical copy of the game</a>. Suffice it to say, Peter does not condone piracy or the illegal downloading of ROMs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <!-- Bottom Tabbar-->
+      <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner"><a href="#view-1" class="tab-link active"> <i class="icon tabbar-demo-icon-1"></i><span class="tabbar-label">Store</span></a><a href="#view-2" class="tab-link"><i class="icon tabbar-demo-icon-2"></i><span class="tabbar-label">FAQ</span></a></div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
