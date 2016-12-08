@@ -1,2 +1,2 @@
 # Peter's Apps
-**Peter's Apps** hosts iOS apps for friends of Peter's to download.
+**Peter's Apps** hosts iOS apps for Peter's friends to download.
