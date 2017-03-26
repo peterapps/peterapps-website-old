@@ -25,6 +25,8 @@ function reset(){
 	red = 0;
 	total = 0;
 	started = false;
+	piEl.innerHTML = totalEl.innerHTML = redEl.innerHTML = blueEl.innerHTML = error.innerHTML = 0;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function start(){
