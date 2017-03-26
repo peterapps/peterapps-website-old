@@ -20,6 +20,13 @@ function stop(){
 	started = false;
 }
 
+function reset(){
+	stop();
+	red = 0;
+	total = 0;
+	started = false;
+}
+
 function start(){
 	if (!started){
 		loop = setInterval(step, frameRate);
