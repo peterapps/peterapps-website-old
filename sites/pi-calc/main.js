@@ -4,6 +4,7 @@ var red = 0;
 var total = 0;
 var started = false;
 var frameRate = 1;
+var dotsPerMs = 500;
 
 window.addEventListener("load", function(){
 	canvas = document.getElementsByTagName("canvas")[0];
@@ -37,18 +38,20 @@ function start(){
 }
 
 function step() {
-	var x = (Math.random() * 2) - 1; //Returns value from -1 to 1
-	var y = (Math.random() * 2) - 1; //Returns value from -1 to 1
-	var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)); //Return distance between (x, y) and (0, 0). Will be from 0 to 1
-	if (r <= 1) { //If (x, y) is inside the circle, draw in red
-		ctx.fillStyle = "red";
-		red++
-	} else { //If outside, draw in blue
-		ctx.fillStyle = "blue";
+	for (var i = 0; i < dotsPerMs; i++){
+		var x = (Math.random() * 2) - 1; //Returns value from -1 to 1
+		var y = (Math.random() * 2) - 1; //Returns value from -1 to 1
+		var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)); //Return distance between (x, y) and (0, 0). Will be from 0 to 1
+		if (r <= 1) { //If (x, y) is inside the circle, draw in red
+			ctx.fillStyle = "red";
+			red++
+		} else { //If outside, draw in blue
+			ctx.fillStyle = "blue";
+		}
+		total++
+		//Draw a 1px dot
+		ctx.fillRect((x * canvas.width/2) + canvas.width/2, (y * canvas.height/2) + canvas.height/2, 1, 1);
 	}
-	total++
-	//Draw a 1px dot
-	ctx.fillRect((x * canvas.width/2) + canvas.width/2, (y * canvas.height/2) + canvas.height/2, 1, 1);
 	//Update table cells
 	redEl.innerHTML = red.toString();
 	blueEl.innerHTML = (total - red).toString();
