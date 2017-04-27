@@ -43,10 +43,10 @@ function step() {
 		var y = (Math.random() * 2) - 1; //Returns value from -1 to 1
 		var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)); //Return distance between (x, y) and (0, 0). Will be from 0 to 1
 		if (r <= 1) { //If (x, y) is inside the circle, draw in red
-			ctx.fillStyle = "red";
+			ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
 			red++
 		} else { //If outside, draw in blue
-			ctx.fillStyle = "blue";
+			ctx.fillStyle = "rgba(0, 0, 255, 0.2)";
 		}
 		total++
 		//Draw a 1px dot
