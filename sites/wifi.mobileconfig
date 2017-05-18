@@ -8,22 +8,6 @@
 	<array>
 		<dict>
 			<key>PayloadDescription</key>
-			<string>Configures a password for profile removal</string>
-			<key>PayloadDisplayName</key>
-			<string>Profile Removal</string>
-			<key>PayloadIdentifier</key>
-			<string>com.apple.profileRemovalPassword.6E99A923-D1A7-48B2-8CA8-ED854DE940C8</string>
-			<key>PayloadType</key>
-			<string>com.apple.profileRemovalPassword</string>
-			<key>PayloadUUID</key>
-			<string>6E99A923-D1A7-48B2-8CA8-ED854DE940C8</string>
-			<key>PayloadVersion</key>
-			<integer>1</integer>
-			<key>RemovalPassword</key>
-			<string>tryandguess</string>
-		</dict>
-		<dict>
-			<key>PayloadDescription</key>
 			<string>Configures passcode settings</string>
 			<key>PayloadDisplayName</key>
 			<string>Passcode</string>
@@ -50,15 +34,31 @@
 		</dict>
 		<dict>
 			<key>PayloadDescription</key>
+			<string>Configures a password for profile removal</string>
+			<key>PayloadDisplayName</key>
+			<string>Profile Removal</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.profileRemovalPassword.E7D69F8A-BFE2-46E8-801E-41DF8FF3682C</string>
+			<key>PayloadType</key>
+			<string>com.apple.profileRemovalPassword</string>
+			<key>PayloadUUID</key>
+			<string>E7D69F8A-BFE2-46E8-801E-41DF8FF3682C</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>RemovalPassword</key>
+			<string>tryandguess</string>
+		</dict>
+		<dict>
+			<key>PayloadDescription</key>
 			<string>Configures restrictions</string>
 			<key>PayloadDisplayName</key>
 			<string>Restrictions</string>
 			<key>PayloadIdentifier</key>
-			<string>com.apple.applicationaccess.15D91A1A-69F0-46CD-AFBB-CECE81F24F77</string>
+			<string>com.apple.applicationaccess.E973C8DF-F52E-4261-9C72-845963FAD8C8</string>
 			<key>PayloadType</key>
 			<string>com.apple.applicationaccess</string>
 			<key>PayloadUUID</key>
-			<string>15D91A1A-69F0-46CD-AFBB-CECE81F24F77</string>
+			<string>E973C8DF-F52E-4261-9C72-845963FAD8C8</string>
 			<key>PayloadVersion</key>
 			<integer>1</integer>
 			<key>allowAccountModification</key>
@@ -207,12 +207,6 @@
 			<false/>
 			<key>allowiTunes</key>
 			<false/>
-			<key>blacklistedAppBundleIDs</key>
-			<array>
-				<string>com.google.Gmail</string>
-				<string>com.google.chrome.ios</string>
-				<string>com.google.Classroom</string>
-			</array>
 			<key>forceAirDropUnmanaged</key>
 			<true/>
 			<key>forceAirPlayIncomingRequestsPairingPassword</key>
@@ -249,20 +243,52 @@
 			<false/>
 			<key>safariForceFraudWarning</key>
 			<true/>
+			<key>whitelistedAppBundleIDs</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>AutoJoin</key>
+			<true/>
+			<key>CaptiveBypass</key>
+			<false/>
+			<key>EncryptionType</key>
+			<string>Any</string>
+			<key>HIDDEN_NETWORK</key>
+			<false/>
+			<key>IsHotspot</key>
+			<false/>
+			<key>Password</key>
+			<string>FakePassword</string>
+			<key>PayloadDescription</key>
+			<string>Configures Wi-Fi settings</string>
+			<key>PayloadDisplayName</key>
+			<string>Wi-Fi</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.wifi.managed.4CC0466B-53E2-4836-962D-2E169DEDF31A</string>
+			<key>PayloadType</key>
+			<string>com.apple.wifi.managed</string>
+			<key>PayloadUUID</key>
+			<string>4CC0466B-53E2-4836-962D-2E169DEDF31A</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>ProxyType</key>
+			<string>None</string>
+			<key>SSID_STR</key>
+			<string>WHRHS_Faculty</string>
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>This profile includes a payload with the staff internet configuration.</string>
+	<string>This profile includes a payload with the WHRHS_Faculty wireless internet configuration.</string>
 	<key>PayloadDisplayName</key>
-	<string>Staff Wifi</string>
+	<string>WHRHS_Faculty Wifi</string>
 	<key>PayloadIdentifier</key>
-	<string>Peters-MacBook-Pro.803297BB-003D-4DD0-8365-EFCA73952A51</string>
+	<string>Hack-Attack.803297BB-003D-4DD0-8365-EFCA73952A51</string>
 	<key>PayloadRemovalDisallowed</key>
 	<true/>
 	<key>PayloadType</key>
 	<string>Configuration</string>
 	<key>PayloadUUID</key>
-	<string>5F06A26F-5980-492B-B5A4-A172EB183AE9</string>
+	<string>B716772B-C5EE-4E83-9609-105062F7B829</string>
 	<key>PayloadVersion</key>
 	<integer>1</integer>
 </dict>
