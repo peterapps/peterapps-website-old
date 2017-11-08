@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Peter's Rectangle Approximation Methods</title>
+	<style>
+		body {font-family: sans-serif;}
+		#calculator {
+		width: 100%;
+		height: 300px;
+		bottom: 0;
+		left: 0;
+		}
+
+		table {
+		border-collapse: collapse;
+		width: 100%;
+		}
+
+		table, tr, td {
+		border: 1px solid black;
+		}
+	</style>
+	<script type="text/javascript" src="https://www.desmos.com/api/v0.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+	<script type="text/javascript" src="https://rawgit.com/josdejong/mathjs/master/dist/math.min.js"></script>
+	<script type="text/javascript">
+console.clear();
+var calculator, equation, parser;
+
+window.addEventListener("load", function() {
+  var elt = document.getElementById('calculator');
+  calculator = Desmos.GraphingCalculator(elt, {
+    "keypad": false,
+    "expressions": false
+  });
+  update();
+  getY(0);
+}, false);
+
+function update(){
+	calculator.setExpression({
+  	"id": "graph1",
+    "latex": "f(x)=" + getEquation(),
+    "color": Desmos.Colors.RED
+  });
+}
+
+function getEquation(){
+	equation = document.getElementById("equation").value;
+  parser = math.parser();
+  parser.eval("f(x)=" + equation);
+  return equation;
+}
+
+function getY(x){
+	return parser.eval("f(" + x + ")");
+}
+
+var rects = [];
+function clearRects(){
+	calculator.removeExpressions(rects);
+	rects = [];
+}
+function createRect(x, width, height){
+	var id = "rect" + rects.length;
+  var endX = x + width;
+	rects.push({"id": id});
+  calculator.setExpression({
+  	"id": id,
+    "latex": x + "<=x<=" + endX + "\\left\\{0<=y<=" + height + "\\right\\}",
+    "color": Desmos.Colors.BLUE
+  })
+}
+
+function ram(offset){
+	clearRects();
+  var n = parseInt(document.getElementById("n").value);
+  var start = parseFloat(document.getElementById("start").value);
+  var end = parseFloat(document.getElementById("end").value);
+  var interval = (end - start) / n;
+  var area = 0;
+  for (var i = start; i < end; i += interval){
+    var x = i;
+    var width = interval;
+    var height = getY(x + offset * interval);
+    createRect(x, width, height);
+    area += width * height;
+  }
+  displayArea(area);
+}
+
+function displayArea(area){
+	document.getElementById("area").innerHTML = "Area: " + area;
+}
+	</script>
+</head>
+<body>
+<h1>Peter's Rectangle Approximation Methods</h1>
+	<table>
+  <tbody>
+    <tr>
+      <td colspan="4">
+      Function: f(x) = <input type="text" id="equation" value="x^2" />
+        <button onclick="update()">
+        Update
+        </button>
+        <button onclick="ram(0)">
+        LRAM
+        </button>
+        <button onclick="ram(1)">
+        RRAM
+        </button>
+        <button onclick="ram(0.5)">
+        MRAM
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        # of intervals: <input type="number" min="1" step="1" id="n" value="4" />
+      </td>
+      <td>
+        Start x: <input type="number" id="start" value="0" />
+      </td>
+      <td>
+        End x: <input type="number" id="end" value="2" />
+      </td>
+      <td id="area">
+        
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div id="calculator"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
