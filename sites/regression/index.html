@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Peter's Rectangle Approximation Methods</title>
+	<style>
+body {
+  position: absolute;
+  font-family: sans-serif;
+  margin: 5px;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+tr,
+th,
+td {
+  border: 1px solid black;
+  vertical-align: top;
+}
+
+#calculator {
+  width: 100%;
+  height: 400px;
+}
+
+#t {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+	</style>
+	<script type="text/javascript" src="https://www.desmos.com/api/v0.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+	<script type="text/javascript">function regression(data, n) {
+
+  //Adapted from http://www.bragitoff.com/2015/09/c-program-for-polynomial-fit-least-squares/
+
+  var i, j, k; //Used for iterations
+  var N = data.length;
+  var x = [],
+    y = [];
+  for (i = 0; i < N; i++) {
+    x.push(data[i][0]);
+    y.push(data[i][1]);
+  }
+  var X = new Array(2 * n + 1); //Array that will store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
+  for (i = 0; i < (2 * n) + 1; i++) {
+    X[i] = 0;
+    for (j = 0; j < N; j++)
+      X[i] = X[i] + Math.pow(x[j], i); //consecutive positions of the array will store N,sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
+  }
+  var B = new Array(n + 1); //B is the Normal matrix(augmented) that will store the equations
+  for (i = 0; i < n + 1; i++) {
+    B[i] = new Array(n + 2);
+    for (j = 0; j < n + 2; j++)
+      B[i][j] = 0;
+  }
+  var a = new Array(n + 1); //for the value of the final coefficients
+  for (i = 0; i < n + 1; i++)
+    a[i] = 0;
+  for (i = 0; i <= n; i++)
+    for (j = 0; j <= n; j++)
+      B[i][j] = X[i + j]; //Build the Normal matrix by storing the corresponding coefficients at the right positions except the last column of the matrix
+  var Y = new Array(n + 1); //Array to store the values of sigma(yi),sigma(xi*yi),sigma(xi^2*yi)...sigma(xi^n*yi)
+  for (i = 0; i < n + 1; i++) {
+    Y[i] = 0;
+    for (j = 0; j < N; j++)
+      Y[i] = Y[i] + Math.pow(x[j], i) * y[j]; //consecutive positions will store sigma(yi),sigma(xi*yi),sigma(xi^2*yi)...sigma(xi^n*yi)
+  }
+  for (i = 0; i <= n; i++)
+    B[i][n + 1] = Y[i]; //load the values of Y as the last column of B(Normal Matrix but augmented)
+  n = n + 1; //n is made n+1 because the Gaussian Elimination part below was for n equations, but here n is the degree of polynomial and for n degree we get n+1 equations
+  for (i = 0; i < n; i++) { //From now Gaussian Elimination starts(can be ignored) to solve the set of linear equations (Pivotisation)
+    for (k = i + 1; k < n; k++) {
+      if (B[i][i] < B[k][i]) {
+        for (j = 0; j <= n; j++) {
+          var temp = B[i][j];
+          B[i][j] = B[k][j];
+          B[k][j] = temp;
+        }
+      }
+    }
+  }
+  for (i = 0; i < n - 1; i++) { //loop to perform the gauss elimination
+    for (k = i + 1; k < n; k++) {
+      var t = B[k][i] / B[i][i];
+      for (j = 0; j <= n; j++)
+        B[k][j] = B[k][j] - (t * B[i][j]); //make the elements below the pivot elements equal to zero or elimnate the variables
+    }
+  }
+  for (i = n - 1; i >= 0; i--) { //back-substitution
+    //x is an array whose values correspond to the values of x,y,z..
+    a[i] = B[i][n]; //make the variable to be calculated equal to the rhs of the last equation
+    for (j = 0; j < n; j++) {
+      if (j != i) { //then subtract all the lhs values except the coefficient of the variable whose value is being calculated
+        a[i] = a[i] - B[i][j] * a[j];
+      }
+    }
+    a[i] = a[i] / B[i][i]; //now finally divide the rhs by the coefficient of the variable to be calculated
+  }
+  return a;
+}
+
+function toEquation(a, forHTML) {
+  var equation = "y = ";
+  var o = 0,
+    p = 0;
+  for (i = a.length - 1; i >= 0; i--) { //Reverse through a
+    var str = Math.round(a[i] * 10000) / 10000;
+    var exp = forHTML ? "<sup>" + i + "</sup>" : "^" + i;
+    if (str != 0) {
+      if (p > 0) {
+        if (str < 0)
+          str = " - " + (-str).toString();
+        else str = " + " + (str).toString();
+      }
+      if (i > 1) str += "x" + exp;
+      else if (i > 0) str += "x";
+      equation += str;
+      p++;
+    }
+    o++;
+  }
+  return equation;
+}
+
+function addRow(j = 1, data = false) {
+  var table = document.getElementById("table");
+  for (var i = 0; i < j; i++) {
+    var tr = document.createElement("tr");
+    tr.innerHTML += '<td><input type="number" class="x" value="' + (data ? data[i][0] : '') + '" /></td><td><input type="number" class="y" value="' + (data ? data[i][1] : '') + '" /></td><td><button class="remove" onclick="removeRow(this);">x</button></td>';
+    table.appendChild(tr);
+  }
+}
+
+function removeRow(btn) {
+  var tr = btn.parentNode.parentNode;
+  tr.parentNode.removeChild(tr);
+}
+var calculator;
+
+function csvXY(csv) {
+  var data = [];
+  var rows = csv.split(/\r\n|\n/);
+  for (var i = 0; i < rows.length; i++) {
+    var xy = rows[i].split(',');
+    data.push([parseFloat(xy[0]), parseFloat(xy[1])]);
+  }
+  return data;
+}
+
+function handleFile(event) {
+  var f = event.target.files[0];
+  var r = new FileReader();
+  r.onload = function(e) {
+    var contents = e.target.result;
+    var data = csvXY(contents);
+    var pairs = document.getElementsByClassName("x");
+    while (pairs[0]) removeRow(pairs[0]);
+    //addRow(data.length, data);
+    calculate(data);
+  }
+  r.readAsText(f);
+}
+
+function calculate(data = []) {
+  var xs = document.getElementsByClassName("x"),
+    ys = document.getElementsByClassName("y"),
+    x = [],
+    y = [];
+  if (data.length == 0) {
+    for (var i = 0; i < xs.length; i++) {
+      data.push([
+        parseFloat(xs[i].value),
+        parseFloat(ys[i].value)
+      ]);
+      x.push(xs[i].value);
+      y.push(ys[i].value);
+    }
+  } else {
+    for (var i = 0; i < data.length; i++) {
+      x.push(data[i][0]);
+      y.push(data[i][1]);
+    }
+  }
+  calculator.setExpression({
+    id: 'table1',
+    type: 'table',
+    columns: [{
+      latex: 'x',
+      values: x.join(',').split(',')
+    }, {
+      latex: 'y',
+      values: y.join(',').split(','),
+      dragMode: Desmos.DragModes.XY
+    }]
+  });
+  var n = parseInt(document.getElementById("deg").value);
+  var equation = regression(data, n);
+  document.getElementById("equ").innerHTML = toEquation(equation, true);
+  calculator.setExpression({
+    "id": "graph1",
+    "latex": toEquation(equation, false),
+    "color": Desmos.Colors.RED
+  });
+  //Set the zoom of the graph to show all of the points
+  for (var i = 0; i < x.length; i++){
+  	x[i] = parseFloat(x[i]);
+    y[i] = parseFloat(y[i]);
+  }
+  x.sort();
+  y.sort();
+  var left = x[0],
+    right = x.pop(),
+    bottom = y[0],
+    top = y.pop();
+  var xAxis = right - left,
+  	yAxis = top - bottom;
+  if (xAxis != yAxis) { //Need to make the scale 1:1
+  	var dif = Math.abs(xAxis - yAxis);
+    var pad = Math.round(dif / 2);
+    if (pad % 2 == 1) pad++;
+    if (xAxis > yAxis) {
+    	bottom -= pad;
+      top += pad;
+    } else {
+    	left -= pad;
+      top += pad;
+    }
+  }
+  var height = right - left;
+  var top = bottom + height;
+  pad = 1;
+  var bounds = {
+    left: left - pad,
+    right: right + pad,
+    bottom: bottom - pad,
+    top: top + pad
+  };
+  console.log(bounds);
+  calculator.setMathBounds(bounds);
+}
+window.addEventListener("load", function() {
+  addRow(5, [ //Sample data
+    [0, 1],
+    [1, 1.8],
+    [2, 1.3],
+    [3, 2.5],
+    [4, 6.3]
+  ]);
+  var elt = document.getElementById('calculator');
+  calculator = Desmos.GraphingCalculator(elt, {
+    "keypad": false,
+    "expressions": false
+  });
+  document.getElementById("file").addEventListener("change", handleFile, false);
+}, false);</script>
+</head>
+<body>
+<h1>
+Peter's Polynomial Regression
+</h1>
+<p>
+Based on <a href="https://www.youtube.com/watch?v=YKmCiQLNcPA" target="_blank">Polynomial Fitting using C++ Program (Tutorial)</a>
+</p>
+<table id="#main">
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2">
+        <table id="t">
+          <thead>
+            <tr>
+              <th>x</th>
+              <th colspan="2">y</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">
+                <button onclick="addRow();">
+                  Add data pair
+                </button>
+                <br/> Upload CSV
+                <input type="file" id="file" value="Upload CSV" />
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        Degree of polynomial:
+        <input type="number" id="deg" value="2" />
+        <br/>
+        <button onclick="calculate();">
+          Calculate
+        </button>
+      </td>
+      <td id="equ"></td>
+    </tr>
+    <tr>
+      <td style="width:100%;height:100%">
+        <div id="calculator"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
