@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Peter's Inspirational Quote Generator</title>
+	<style>
+body {
+  font-family: sans-serif;
+  background: black;
+  color: white;
+}
+#quote li {
+  cursor: pointer;
+}
+
+li.good {
+  background: #222;
+}
+
+.objects {
+  color: orange;
+}
+
+.subjects {
+  color: #ffff74;
+}
+
+.verbs {
+  color: #4fd64f;
+}
+
+.prepositionals {
+  color: #bdbdbd;
+}
+
+.adverbs {
+  color: #9393ff;
+}
+
+.audience {
+  color: pink;
+}
+	</style>
+	<script type="text/javascript">
+var words = {
+	"audience": [
+  	"sonny,",
+    "dear boy,",
+    "idiot,"
+  ],
+	"objects": [
+  	"sadness",
+    "invention",
+    "realization",
+    "journey",
+    "action",
+    "misery",
+    "rebirth",
+    "genius",
+    "insanity",
+    "beauty",
+    "death",
+    "the world",
+    "inner beauty",
+    "true character",
+    "virtue",
+    "perfection"
+  ],
+  "adverbs": [
+    "truely",
+    "always",
+    "never",
+    "typically",
+    "rarely"
+  ],
+  "verbs": [
+  	"makes",
+    "transforms",
+    "reveals",
+    "creates",
+    "destroys",
+    "reflects",
+    "is",
+    "inspires",
+    "beholds",
+    "causes",
+    "touches"
+  ],
+  "prepositionals": [
+  	"for yourself",
+    "for everyone",
+    "deep down",
+    "from inside out"
+  ]
+};
+words.subjects = words.objects;
+
+function word(type, chance){
+	if (Math.round(Math.random()*100) <= chance) {
+		var w = words[type][Math.floor(Math.random() * words[type].length)];
+    var span = document.createElement("span");
+    span.innerHTML = w;
+    span.className = type;
+    return span;
+  } else return false;
+}
+
+function capitalize(str){
+	return str.substring(0, 1).toUpperCase() + str.substring(1);
+}
+
+function generate(){
+	var quote = [
+    word("audience", 5),
+    word("subjects", 100),
+    word("adverbs", 50),
+    word("verbs", 100),
+    word("objects", 100),
+    word("prepositionals", 50)
+  ];
+  for (var i = 0; i < quote.length; i++){
+  	if (!quote[i]) quote.splice(i, 1);
+  }
+  quote[0].innerHTML = capitalize(quote[0].innerHTML);
+	var ol = document.getElementById("quote");
+  var li = document.createElement("li");
+  for (var i = 0; i < quote.length; i++){
+  	li.appendChild(quote[i]);
+    li.innerHTML += " ";
+  }
+  li.innerHTML = li.innerHTML.substring(0, li.innerHTML.length - 1) + ".";
+  li.addEventListener("click", function(){
+  	li.className = (li.className == "good") ? "" : "good";
+  }, false);
+  ol.insertBefore(li, ol.firstChild);
+}
+
+window.addEventListener("load", function(){
+	for (var i = 0; i < 15; i++) generate();
+}, false);
+
+var loop = false;
+function start(){
+	if (!loop) loop = setInterval(generate, 50);
+}
+function stop(){
+	clearInterval(loop);
+  loop = false;
+}
+function clearQuotes(){
+	var ol = document.getElementById("quote");
+  var li = ol.firstChild;
+  ol.innerHTML = li.outerHTML;
+}
+	</script>
+</head>
+<body>
+<h1>
+Peter's Inspirational Quote Generator
+</h1>
+<p>
+Structure:
+<span class="audience">Audience,</span>
+<span class="subjects">subject</span>
+<span class="adverbs">adverb</span>
+<span class="verbs">verb</span>
+<span class="objects">object</span>
+<span class="prepositionals">prepositional phrase</span>.
+</p>
+<p>
+  <button onclick="generate()">Generate one</button>
+  <button onclick="start()">Start loop</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="clearQuotes()">Clear</button>
+</p>
+<ol id="quote" reversed>
+
+</ol>
+</body>
+</html>
