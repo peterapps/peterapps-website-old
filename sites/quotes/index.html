@@ -40,59 +40,8 @@ li.good {
   color: pink;
 }
 	</style>
+	<script type="text/javascript" src="./words.js"></script>
 	<script type="text/javascript">
-var words = {
-	"audience": [
-  	"sonny,",
-    "dear boy,",
-    "idiot,"
-  ],
-	"objects": [
-  	"sadness",
-    "invention",
-    "realization",
-    "journey",
-    "action",
-    "misery",
-    "rebirth",
-    "genius",
-    "insanity",
-    "beauty",
-    "death",
-    "the world",
-    "inner beauty",
-    "true character",
-    "virtue",
-    "perfection"
-  ],
-  "adverbs": [
-    "truely",
-    "always",
-    "never",
-    "typically",
-    "rarely"
-  ],
-  "verbs": [
-  	"makes",
-    "transforms",
-    "reveals",
-    "creates",
-    "destroys",
-    "reflects",
-    "is",
-    "inspires",
-    "beholds",
-    "causes",
-    "touches"
-  ],
-  "prepositionals": [
-  	"for yourself",
-    "for everyone",
-    "deep down",
-    "from inside out"
-  ]
-};
-words.subjects = words.objects;
 
 function word(type, chance){
 	if (Math.round(Math.random()*100) <= chance) {
@@ -115,7 +64,7 @@ function generate(){
     word("adverbs", 50),
     word("verbs", 100),
     word("objects", 100),
-    word("prepositionals", 50)
+    word("prepositionals", 30)
   ];
   for (var i = 0; i < quote.length; i++){
   	if (!quote[i]) quote.splice(i, 1);
