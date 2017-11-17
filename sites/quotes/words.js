@@ -24,7 +24,9 @@ var words = {
 		"failure",
 		"love",
 		"friendship",
-		"life"
+		"life",
+		"reality",
+		"cruelty"
 	],
 	"adverbs": [
 		"truely",
