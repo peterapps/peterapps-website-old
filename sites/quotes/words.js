@@ -29,10 +29,9 @@ var words = {
 		"cruelty"
 	],
 	"adverbs": [
-		"truely",
 		"always",
 		"never",
-		"typically",
+		"often",
 		"rarely"
 	],
 	"verbs": [
@@ -48,7 +47,9 @@ var words = {
 		"causes",
 		"touches",
 		"encourages",
-		"helps"
+		"helps",
+		"leads to",
+		"complements"
 	],
 	"prepositionals": [
 		"for yourself",
