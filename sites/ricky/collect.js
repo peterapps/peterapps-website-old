@@ -13,7 +13,7 @@ db.all("SELECT ROWID FROM handle WHERE id='" + phoneNumber + "'", function(err1,
 	console.log(handles.length + " handles found.");
 	for (var i = 0; i < handles.length; i++){
 		var handle_id = handles[i];
-		db.all("SELECT text, handle_id FROM message WHERE handle_id=" + handles[i], function(err, rows){
+		db.all("SELECT text, handle_id FROM message WHERE is_from_me=0 AND handle_id=" + handles[i], function(err, rows){
 			console.log("Handle " + rows[0].handle_id);
 			console.log("  " + rows.length + " rows added.");
 			rows.forEach(function(row){
