@@ -1,28 +1,41 @@
 /* Your app custom files in this file */
 /* Tab bar icons */
+/*
+	Inactive: #929292
+	Active: #007aff
+	Good source: https://www.flaticon.com/
+*/
 i.tabbar-demo-icon-2 {
   width: 30px;
   height: 30px;
-  background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' fill='%23929292'><g><circle cx='15.2' cy='8.8' r='1.5'/><polygon points='16.7,12.3 16.7,11.7 16.7,11.3 13.7,11.3 13.7,12.3 14.7,12.3 14.7,20.3 13.7,20.3 13.7,21.3 17.7,21.3 17.7,20.3 16.7,20.3'/><path d='M15.2,2.3C8.3,2.3,2.7,7.9,2.7,14.8s5.6,12.5,12.5,12.5c6.9,0,12.5-5.6,12.5-12.5S22.1,2.3,15.2,2.3z M15.2,26.3 c-6.3,0-11.5-5.2-11.5-11.5S8.8,3.3,15.2,3.3s11.5,5.2,11.5,11.5S21.5,26.3,15.2,26.3z'/></g></svg>");
+  background-image: url("../img/faq-inactive.svg");
 }
 .active i.tabbar-demo-icon-2 {
-  background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 30 30' fill='%23007aff'><path d='M15,2.6C8.1,2.6,2.5,8.2,2.5,15.1C2.5,22,8.1,27.6,15,27.6S27.5,22,27.5,15.1C27.5,8.2,21.9,2.6,15,2.6z M15,7.6 c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5C13.5,8.3,14.2,7.6,15,7.6z M17.5,21.6h-4v-1h1v-8h-1v-1h3V12 v0.6v8h1V21.6z'/></svg>");
+  background-image: url("../img/faq-active.svg");
 }
 i.tabbar-demo-icon-1 {
   width: 30px;
   height: 30px;
-  background-image: url("../img/apps-inactive.png");
+  background-image: url("../img/apps-inactive.svg");
 }
 .active i.tabbar-demo-icon-1 {
-  background-image: url("../img/apps-active.png");
+  background-image: url("../img/apps-active.svg");
 }
 i.tabbar-demo-icon-3 {
 	width: 30px;
 	height: 30px;
-	background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 30 30" height="30px" version="1.1" viewBox="0 0 32 32" width="30px" xml:space="preserve" fill="%23929292"><g><path d="M4,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4s4-1.791,4-4C8,13.791,6.209,12,4,12z M4,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2s2,0.896,2,2C6,17.105,5.105,18,4,18z"/><path d="M28,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4c2.209,0,4-1.791,4-4C32,13.791,30.209,12,28,12z M28,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2c1.104,0,2,0.896,2,2C30,17.105,29.104,18,28,18z"/><path d="M16,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4c2.209,0,4-1.791,4-4C20,13.791,18.209,12,16,12z M16,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2c1.104,0,2,0.896,2,2C18,17.105,17.104,18,16,18z"/></g></svg>');
+	background-image: url("../img/tools-inactive.svg");
 }
 .active i.tabbar-demo-icon-3 {
 	width: 30px;
 	height: 30px;
-	background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 30 30" height="30px" version="1.1" viewBox="0 0 32 32" width="30px" xml:space="preserve" fill="%23007aff"><g><path d="M4,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4s4-1.791,4-4C8,13.791,6.209,12,4,12z M4,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2s2,0.896,2,2C6,17.105,5.105,18,4,18z"/><path d="M28,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4c2.209,0,4-1.791,4-4C32,13.791,30.209,12,28,12z M28,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2c1.104,0,2,0.896,2,2C30,17.105,29.104,18,28,18z"/><path d="M16,12c-2.209,0-4,1.791-4,4c0,2.209,1.791,4,4,4c2.209,0,4-1.791,4-4C20,13.791,18.209,12,16,12z M16,18   c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2c1.104,0,2,0.896,2,2C18,17.105,17.104,18,16,18z"/></g></svg>');
+	background-image: url("../img/tools-active.svg");
+}
+i.tabbar-demo-icon-4 {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/games-inactive.svg");
+}
+.active i.tabbar-demo-icon-4 {
+  background-image: url("../img/games-active.svg");
 }

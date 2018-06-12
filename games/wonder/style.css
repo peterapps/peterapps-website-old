@@ -1,0 +1,70 @@
+body {
+	background-color: lightblue;
+	font-family: sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+canvas {
+	background-color: white;
+	position: absolute;
+	top: 0px;
+	height: 100%;
+	/*transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	right: 50%;*/
+}
+table, table button {
+	height:100%;
+	width:100%;
+	border-collapse: collapse;
+	font-family: "Impact", Arial, sans-serif;
+	font-size: 20px;
+}
+tr, th, td {
+	border: 1px solid black;
+	padding: 5px;
+	text-align: center;
+}
+img { 
+	image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+	image-rendering: -moz-crisp-edges;          /* Firefox                        */
+	image-rendering: -o-crisp-edges;            /* Opera                          */
+	image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+	image-rendering: pixelated; /* Chrome */
+	image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+-ms-interpolation-mode: nearest-neighbor;   	/* IE8+                           */
+}
+tr.startRow {
+	display: none;
+}
+.chooser.p1 {
+	color: red;
+}
+.chooser.p2 {
+	color: blue;
+}
+.chooser.p1:hover {
+	background-color: #f4a7a7;
+}
+.chooser.p2:hover {
+	background-color: #a7a7f4;
+}
+img#logo {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 50px;
+}
+.footer {
+	text-align: center;
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.start:hover {
+	background-color: #a2efa2;
+}
+.start:active {
+	background-color: #00FF00;
+}
