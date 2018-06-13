@@ -317,7 +317,7 @@ class Location {
              LEFT: "A",
              RIGHT: "D",
              JUMP: "W",
-             ATTACK: "CTRL"
+             ATTACK: "V"
           };
        } else if (this.scheme == "arrows"){
           this.controls = {
