@@ -253,6 +253,7 @@ class Location {
         this.width = 64;
         this.height = 128;
 		 this.color = "black";
+	    this.thick = 2;
     }
     draw(ctx, loc, dir){
         //Spritesheet stuff
@@ -269,7 +270,7 @@ class Location {
 		 ctx.drawImage(this.image, sx, sy, sw, sh, x, loc.y, this.width, this.height);
 		 //Draw hitbox
 		 ctx.strokeStyle = this.color;
-		 ctx.lineWidth = 2;
+		 ctx.lineWidth = this.thick;
 		 ctx.strokeRect(x, loc.y, this.width, this.height);
 		 //Draw hitbox with padding
 		 var padding = 20;
@@ -385,6 +386,8 @@ class Location {
           if (this.jumps > 0) this.jumps = 0;
 			//if (!this.keyPressed("JUMP")) this.jumpCD = 0;
        }
+	    if (this.attackedCD > 0) this.fighter.sprite.thick = 4;
+	    else this.fighter.sprite.thick = 2;
 		//Sprite
 		if (this.fighter.sprite.animationCD > 0) this.fighter.sprite.animationCD -= 1/60;
 		else {
