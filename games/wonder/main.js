@@ -395,7 +395,7 @@ class Location {
 		if (this.damage > 20){
 			//this.multiplier = Math.pow(2, 0.2 * this.damage);
 			//CALCULATE MULTIPLIER
-			this.multiplier += 0.075 * (this.damage - 20);
+			this.multiplier += 0.05 * (this.damage - 20);
 		}
     }
 	touchingStage(){
@@ -432,6 +432,8 @@ class Location {
 			if ( (this.direction == 1 && this.location.x < this.other.location.x) || (this.direction == -1 && this.location.x > this.other.location.x) ) {
 				var me = this.multiplier;
 				if (this.damage > this.fighter.threshold) me *= 1.5;
+				if (this.other.damage > 20) me += this.other.multiplier;
+				me /= 2;
 				this.fighter.attack(this.other, this.direction, me);
 			}
 		}
