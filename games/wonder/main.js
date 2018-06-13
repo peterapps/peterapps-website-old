@@ -395,7 +395,7 @@ class Location {
 		if (this.damage > 20){
 			//this.multiplier = Math.pow(2, 0.2 * this.damage);
 			//CALCULATE MULTIPLIER
-			this.multiplier += 0.05 * (this.damage - 20);
+			this.multiplier += 0.02 * (this.damage - 20);
 		}
     }
 	touchingStage(){
