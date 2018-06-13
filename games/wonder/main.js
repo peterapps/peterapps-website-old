@@ -189,6 +189,8 @@ class Location {
     setPlayers(a, b){ //void setFighter1(Fighter fighter)
         a.other = b;
         b.other = a;
+        a.fighter.sprite.color = "red";
+        b.fighter.sprite.color = "blue";
         this.players[0] = a;
         this.players[1] = b;
     }
