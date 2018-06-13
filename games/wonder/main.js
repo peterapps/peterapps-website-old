@@ -332,9 +332,10 @@ class Location {
        return this.keyboard.pressed[this.controls[key]];
     }
     doControls(){
-		this.acceleration.x = 0;
-		if (this.attackedCD == 0 && this.keyPressed("LEFT")) this.acceleration.x -= this.fighter.speed;
-		if (this.attackedCD == 0 && this.keyPressed("RIGHT")) this.acceleration.x += this.fighter.speed;
+		var attacked = (this.attackedCD > 0);
+	    this.acceleration.x = 0;
+		if (!attacked && this.keyPressed("LEFT")) this.acceleration.x -= this.fighter.speed;
+		if (!attacked && this.keyPressed("RIGHT")) this.acceleration.x += this.fighter.speed;
 		if (this.acceleration.x == 0 && Math.abs(this.velocity.x)){ //Decelerate from friction and air resistance
 			if (this.collision(this.stage)){ //On the floor
 				this.acceleration.x = -1;
@@ -347,7 +348,7 @@ class Location {
 			this.attackedCD += 1/60;
 			if (this.attackedCD >= 0.75) this.attackedCD = 0;
 		}
-		if (this.keyPressed("JUMP") && this.jumps < 2 && this.jumpCD <= 0) {
+		if (!attacked && this.keyPressed("JUMP") && this.jumps < 2 && this.jumpCD <= 0) {
           this.velocity.y = this.fighter.jump;
           this.jumps++;
        }
@@ -355,7 +356,7 @@ class Location {
 			this.jumpCD += 1/60;
 			if (this.jumpCD > 0.01 && !this.keyPressed("JUMP")) this.jumpCD = 0;
 		}
-       if (this.keyPressed("ATTACK") && this.attacks < 1 && this.attackCD <= 0){
+       if (!attacked && this.keyPressed("ATTACK") && this.attacks < 1 && this.attackCD <= 0){
 			this.attack();
 			this.attacks++;
 		}
