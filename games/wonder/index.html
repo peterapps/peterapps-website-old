@@ -9,9 +9,10 @@
         <div>
             <table align="center">
                 <tr>
-                    <th colspan="5"><img src="./img/wonder-whim-tim.png" alt="Wonder Whim-Tim" height="192"></th>
+                    <th colspan="6"><img src="./img/wonder-whim-tim.png" alt="Wonder Whim-Tim" height="192"></th>
                 </tr>
                 <tr>
+                	<td rowspan="2">CPU</td>
                     <td>Eason</td>
                     <td>John</td>
                     <td>Ricky</td>
@@ -26,6 +27,7 @@
 					<td><img src="./img/zach_1.png" alt="Zach"></td>
                 </tr>
 				<tr>
+					<td><button onclick="cpu1(this)" class="cpu p1">Off</button></td>
 					<td><button onclick="chooseP1('Eason')" class="chooser p1 Eason">Choose P1</button></td>
 					<td><button onclick="chooseP1('John')" class="chooser p1 John">Choose P1</button></td>
 					<td><button onclick="chooseP1('Ricky')" class="chooser p1 Ricky">Choose P1</button></td>
@@ -33,6 +35,7 @@
 					<td><button onclick="chooseP1('Zach')" class="chooser p1 Zach">Choose P1</button></td>
 				</tr>
 				<tr>
+					<td><button onclick="cpu2(this)" class="cpu p2">Off</button></td>
 					<td><button onclick="chooseP2('Eason')" class="chooser p2 Eason">Choose P2</button></td>
 					<td><button onclick="chooseP2('John')" class="chooser p2 John">Choose P2</button></td>
 					<td><button onclick="chooseP2('Ricky')" class="chooser p2 Ricky">Choose P2</button></td>
@@ -40,8 +43,8 @@
 					<td><button onclick="chooseP2('Zach')" class="chooser p2 Zach">Choose P2</button></td>
 				</tr>
 				<tr class="startRow">
-					<td colspan="5">
-						<button onclick="setup()" class="start">START</button>
+					<td colspan="6">
+						<button onclick="this.blur();setup()" class="start">START</button>
 					</td>
 				</tr>
             </table>

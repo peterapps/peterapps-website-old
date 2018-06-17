@@ -38,16 +38,19 @@ img {
 tr.startRow {
 	display: none;
 }
-.chooser.p1 {
+button {
+	outline: none;
+}
+.p1 {
 	color: red;
 }
-.chooser.p2 {
+.p2 {
 	color: blue;
 }
-.chooser.p1:hover {
+.p1:hover {
 	background-color: #f4a7a7;
 }
-.chooser.p2:hover {
+.p2:hover {
 	background-color: #a7a7f4;
 }
 img#logo {

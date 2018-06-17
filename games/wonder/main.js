@@ -1,11 +1,11 @@
 var fighters, images, fighterNames, names, game, keyboard;
 fighters = {
 	 //Fighter		Name		Color		Rage		Attack		Defense		Knockback		Speed		Jump
-	"Eason":	[	"Eason",	"#A213C3",	60,			5,			0.05,		15,				8,			15		],
-	"Ricky":	[	"Ricky",	"#404040",	80,			10,			0.20,		30,				3,			7		],
-	"Vinay": 	[	"Vinay",	"#00FF00",	100,		7,			0.35,		26,				5,			10		],
-	"Zach": 	[	"Zach",		"#17390E",	120,		6,			0.15,		16,				7,			12		],
-	"John": 	[	"John",		"#6499F1",	110,		3,			0.10,		10,				5,			5		]
+	"Eason":	[	"Eason",	"#A213C3",	60,			12,			0.05,		20,				8,			15		],
+	"Ricky":	[	"Ricky",	"#404040",	80,			12,			0.15,		25,				3,			8		],
+	"Vinay": 	[	"Vinay",	"#00FF00",	100,		12,			0.2,		22,				5,			10		],
+	"Zach": 	[	"Zach",		"#17390E",	120,		12,			0.12,		21,				7,			12		],
+	"John": 	[	"John",		"#6499F1",	110,		5,			0.10,		10,				5,			5		]
  };
  fighterNames = [];
  for (var i in fighters) fighterNames.push(i);
@@ -14,8 +14,8 @@ var names = [false, false];
 function chooseP(name, p, color1, color2){
 	if (names[p - 1] != false){
 		var el = document.querySelector(".chooser.p" + p + "." + names[p - 1]);
-		el.style.backgroundColor = color1;
-		el.style.color = color2;
+		el.style.backgroundColor = null;
+		el.style.color = null;
 	}
 	if (names[p - 1] == name){
 		names[p - 1] = false;
@@ -35,6 +35,27 @@ function chooseP1(name){
 function chooseP2(name){
 	chooseP(name, 2, "buttonface", "blue");
 }
+
+var cpus = [false, false];
+function chooseCPU(btn, p, color){
+	if (!cpus[p - 1]){
+		cpus[p - 1] = true;
+		btn.style.backgroundColor = color;
+		btn.style.color = "white";
+		btn.innerHTML = "On";
+	} else {
+		cpus[p - 1] = false;
+		btn.style.backgroundColor = null;
+		btn.style.color = null;
+		btn.innerHTML = "Off";
+	}
+}
+function cpu1(btn){
+	chooseCPU(btn, 1, "red");
+}
+function cpu2(btn){
+	chooseCPU(btn, 2, "blue");
+}
  
  function init(){
 	 keyboard = new Keyboard();
@@ -49,10 +70,14 @@ function chooseP2(name){
  function setupGame(){
 	var stage = new Stage(1200, 1000);
     game = new Game(1600, 900, stage);
+    
 	var f1 = new Fighter(fighters[names[0]]);
-    var p1 = new Player("WASD", "left", f1, stage, keyboard);
+	var controlsP1 = cpus[0] ? "cpu" : "WASD";
+    var p1 = new Player(controlsP1, "left", f1, stage, keyboard);
+    
     var f2 = new Fighter(fighters[names[1]]);
-    var p2 = new Player("arrows", "right", f2, stage, keyboard);
+    var controlsP2 = cpus[1] ? "cpu" : "arrows";
+    var p2 = new Player(controlsP2, "right", f2, stage, keyboard);
     
     game.setPlayers(p1, p2);
 	 
@@ -177,13 +202,13 @@ class Location {
     }
     drawStats(){
         this.ctx.fillStyle = "black";
-		 this.ctx.font = "30px Arial";
-		 this.ctx.textBaseline = "top";
-		 this.ctx.textAlign = "center";
+		this.ctx.font = "30px Arial";
+		this.ctx.textBaseline = "top";
+		this.ctx.textAlign = "center";
         this.ctx.fillText(this.formatTime(), 0, -(this.height - 100) + 10);
-		 this.ctx.textAlign = "left";
+		this.ctx.textAlign = "left";
         this.ctx.fillText("P1: "+Math.round(this.players[0].damage), -this.width/2 + 10, -(this.height - 100) + 10);
-		 this.ctx.textAlign = "right";
+        this.ctx.textAlign = "right";
         this.ctx.fillText("P2: "+Math.round(this.players[1].damage), this.width/2 - 10, -(this.height - 100) + 10);
     }
     setPlayers(a, b){ //void setFighter1(Fighter fighter)
@@ -312,6 +337,7 @@ class Location {
 		this.attackPress = false;
 		this.attackCD = 0; //attack cooldown... Both of our ideas
 		this.attacked = 0;
+		this.cpu = (scheme == "cpu");
        if (this.scheme == "WASD"){
           this.controls = {
              LEFT: "A",
@@ -326,10 +352,44 @@ class Location {
              JUMP: "UPARROW",
              ATTACK: "SHIFT" //"NUMPAD5"
           };
+       } else if (this.cpu){
+       		this.cpuAttackCD = 0;
+       	  this.simulatedKeys = {LEFT: false, RIGHT: false, JUMP: false, ATTACK: false};
        }
     }
     keyPressed(key){
-       return this.keyboard.pressed[this.controls[key]];
+    	if (this.cpu) {
+    		this.cpuControls();
+    		return this.simulatedKeys[key];
+    	}
+       else return this.keyboard.pressed[this.controls[key]];
+    }
+    cpuControls(){
+    	//First reset controls
+    	for (var i in this.simulatedKeys){
+    		this.simulatedKeys[i] = false;
+    	}
+    	if (this.cpuAttackCD > 0) {
+    		this.cpuAttackCD += 1/60;
+    		if (this.cpuAttackCD > 0.5 + 2/60) this.cpuAttackCD = 0;
+    	}
+    	//Check if we should attack other player
+    	var col = this.pCollision(this.other);
+		if (col){
+			if (this.cpuAttackCD < 0.5){
+				//if ( (this.direction == 1 && this.location.x < this.other.location.x) || (this.direction == -1 && this.location.x > this.other.location.x) ) {
+					this.simulatedKeys.ATTACK = true;
+					this.cpuAttackCD += 1/60;
+				//}
+			}
+		}
+		//Let's move
+		else if (this.other.location.x > this.location.x + this.fighter.sprite.width) this.simulatedKeys.RIGHT = true;
+		else if (this.other.location.x + this.other.fighter.sprite.width < this.location.x) this.simulatedKeys.LEFT = true;
+		
+		if (this.cpuAttackCD >= 0.5){
+			this.simulatedKeys.ATTACK = false;
+		}
     }
     doControls(){
 		var attacked = (this.attackedCD > 0);
@@ -346,7 +406,8 @@ class Location {
 		}
 		if (this.attackedCD > 0) {
 			this.attackedCD += 1/60;
-			if (this.attackedCD >= 0.75) this.attackedCD = 0;
+            //stun time
+			if (this.attackedCD >= 0.2) this.attackedCD = 0;
 		}
 		if (!attacked && this.keyPressed("JUMP") && this.jumps < 2 && this.jumpCD <= 0) {
           this.velocity.y = this.fighter.jump;
@@ -396,10 +457,12 @@ class Location {
 			this.fighter.sprite.animation = "standing";
 		}
 		this.multiplier = 1;
-		if (this.damage > 20){
+        //Changed original from 20 to 0
+		if (this.damage > 0){
 			//this.multiplier = Math.pow(2, 0.2 * this.damage);
 			//CALCULATE MULTIPLIER
-			this.multiplier += 0.005 * (this.damage - 20);
+            //Changed
+			this.multiplier += .02 * (this.damage);
 		}
     }
 	touchingStage(){
@@ -435,8 +498,9 @@ class Location {
 		if (col){
 			if ( (this.direction == 1 && this.location.x < this.other.location.x) || (this.direction == -1 && this.location.x > this.other.location.x) ) {
 				var me = this.multiplier;
-				if (this.damage > this.fighter.threshold) me *= 1.5;
-				if (this.other.damage > 20) me += this.other.multiplier;
+				//if (this.damage > this.fighter.threshold) me *= 1.5;
+                //Changed this
+				if (this.other.damage > 0) me += this.other.multiplier - 1;
 				me /= 2;
 				this.fighter.attack(this.other, this.direction, me);
 			}
@@ -448,7 +512,7 @@ class Location {
 	//Fighter				Name		Color		Rage		Attack		Defense		Knockback		Speed		Jump	Sprite
     //constructor(name, color, rage, attack, defense, knockback, speed, jump) {
 	constructor(args){
-       this.name = args[0];
+        this.name = args[0];
 		this.threshold = args[2];
 		this.rage = false;
 		this.atk = args[3];
