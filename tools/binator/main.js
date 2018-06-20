@@ -42,7 +42,9 @@ var letters = {
 
 window.addEventListener("load", function(){
 	generate();
+	reverse();
 	document.getElementById("in").addEventListener("input", generate, false);
+	document.getElementById("in2").addEventListener("input", reverse, false);
 }, false);
 
 function generate(){
@@ -53,4 +55,14 @@ function generate(){
 		result = result.replace(rule, letters[l]);
 	}
 	document.getElementById("out").innerHTML = result;
+}
+
+function reverse(){
+	var text = document.getElementById("in2").value;
+	var result = text;
+	for (var l in letters){
+		var rule = new RegExp(letters[l], "gi");
+		result = result.replace(rule, l);
+	}
+	document.getElementById("out2").innerHTML = result;
 }

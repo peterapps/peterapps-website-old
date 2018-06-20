@@ -2,7 +2,19 @@
 <html>
 <head>
 	<title>🅱️ℹ️n🅰️t🅾️r</title>
-	<style>body {font-family: sans-serif;}</style>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		#in, #in2 {
+			padding: 5px;
+			width: 100%;
+		}
+		#out, #out2 {
+			padding: 5px;
+			border: 1px solid black;
+		}
+	</style>
 	<script type="text/javascript" src="./main.js"></script>
 </head>
 <body>
@@ -10,7 +22,15 @@
 <!-- Peter's Apps -->
 <p>Check out more of <a href="/">Peter's Apps</a>.</p>
 <!-- End Peter's Apps -->
-	<textarea id="in">Try entering in some text.</textarea>
-	<p id="out"></p>
+	<div>
+		<h3>Generate</h3>
+		<textarea id="in">Try entering in some text to generate emojis.</textarea>
+		<p id="out"></p>
+	</div>
+	<div>
+		<h3>Reverse</h3>
+		<textarea id="in2">🅾️r try reversℹ️🆖 te❎t wℹ️th eⓂ️🅾️jℹ️s.</textarea>
+		<p id="out2"></p>
+	</div>
 </body>
 </html>
