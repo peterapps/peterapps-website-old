@@ -45,6 +45,8 @@ window.addEventListener("load", function(){
 	reverse();
 	document.getElementById("in").addEventListener("input", generate, false);
 	document.getElementById("in2").addEventListener("input", reverse, false);
+	document.getElementById("out").addEventListener("click", selectThis, false);
+	document.getElementById("out2").addEventListener("click", selectThis, false);
 }, false);
 
 function generate(){
@@ -65,4 +67,21 @@ function reverse(){
 		result = result.replace(rule, l);
 	}
 	document.getElementById("out2").innerHTML = result;
+}
+
+function selectThis(){
+	var node = this;
+	if (document.body.createTextRange) {
+		var range = document.body.createTextRange();
+		range.moveToElementText(node);
+		range.select();
+	} else if (window.getSelection) {
+		var selection = window.getSelection();
+		var range = document.createRange();
+		range.selectNodeContents(node);
+		selection.removeAllRanges();
+		selection.addRange(range);
+	} else {
+		console.warn("Could not select text: Unsupported browser.");
+	}
 }
