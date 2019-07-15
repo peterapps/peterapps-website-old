@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Airfoil Plotter</title>
+	<script src="./airfoil.js"></script>
+	<script>
+		window.addEventListener("load", function(){
+			plot(document.getElementById("code").value.toString());
+			document.getElementById("form").addEventListener("submit", function(event){
+				event.preventDefault();
+				plot(document.getElementById("code").value);
+			}, false);
+		}, false);
+	</script>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Peter's 4-digit NACA Airfoil Plotter</h1>
+	<form id="form">
+		NACA airfoil: <input type="text" id="code" value="2412" />
+		<input type="submit" value="Plot" />
+	</form>
+	<canvas id="canvas" width="500" height="500"></canvas>
+</body>
+</html>
