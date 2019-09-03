@@ -29,6 +29,9 @@
   var iter = 0;
   var score = 0;
 
+  var all_keys = ["Z", "X", "C", "V", "B", "A", "S", "D", "F", "G"];
+  var max_key = 2;
+
   // Variables that change as the game progresses
   var key_interval = 120;
   var dot_speed = 0.99;
@@ -57,8 +60,9 @@
   }
 
   function generateKey(){
-    //targetKey = Math.floor(Math.random() * 26) + 65;
-    targetKey = Math.random() > 0.5 ? 88 : 90;
+    if (max_key > all_keys.length) max_key = all_keys.length;
+    var index = Math.floor(Math.random() * max_key);
+    targetKey = all_keys[index].charCodeAt(0);
   }
 
   function getCursor(event){
@@ -109,6 +113,7 @@
     targetKey = 0;
     iter = 0;
     score = 0;
+    max_key = 2;
 
     ctx.fillStyle = "red";
     drawCircle(dot.x, dot.y, dot.r);
@@ -170,6 +175,7 @@
       key_interval = Math.round(key_interval);
       dot_speed *= 1.2;
     }
+    if (iter % (30*60) == 0) max_key++;
     generateCoords();
     // Generate key and check if they pressed the old one
     var ontime = true;
